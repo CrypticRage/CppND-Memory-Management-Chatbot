@@ -17,14 +17,6 @@ ChatLogic::ChatLogic()
     //// STUDENT CODE
     ////
 
-#if 0
-    // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
-#endif
-
     ////
     //// EOF STUDENT CODE
 }
@@ -33,23 +25,6 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-#if 0
-    delete chatbot instance
-    delete _chatBot;
-
-    delete all nodes
-
-    for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-    {
-        delete *it;
-    }
-
-    // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    {
-        delete *it;
-    }
-#endif
 
     ////
     //// EOF STUDENT CODE
@@ -219,7 +194,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     ////
 
     // identify root node
-    GraphNode *rootNode;
+    GraphNode *rootNode = nullptr;
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
         // search for nodes which have no incoming edges
