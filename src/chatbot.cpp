@@ -12,7 +12,7 @@
 ChatBot::ChatBot()
 {
     // invalidate data handles
-    _image = nullptr;
+    _image = NULL;
     _chatLogic = nullptr;
     _rootNode = nullptr;
 }
@@ -44,7 +44,73 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+// copy constructor
+ChatBot::ChatBot(const ChatBot& other) {
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    // data handles (owned)
+    _image = new wxBitmap(*other._image); // avatar image
 
+    // data handles (not owned)
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+}
+
+// copy assignment operator
+ChatBot &ChatBot::operator=(const ChatBot &other) {
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+    if (this == &other) return *this;
+
+    // data handles (owned)
+    _image = new wxBitmap(*other._image); // avatar image
+
+    // data handles (not owned)
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+
+    return *this;
+}
+
+// move constructor
+ChatBot::ChatBot(ChatBot &&other) {
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    // data handles (owned)
+    _image = other._image; // avatar image
+
+    other._image = nullptr;
+
+    // data handles (not owned)
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+
+    other._currentNode = nullptr;
+    other._rootNode = nullptr;
+    other._chatLogic = nullptr;
+}
+
+// move assignment operator
+ChatBot &ChatBot::operator=(ChatBot &&other) {
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+    if (this == &other) return *this;
+
+    // data handles (owned)
+    _image = other._image; // avatar image
+
+    other._image = nullptr;
+
+    // data handles (not owned)
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+
+    other._currentNode = nullptr;
+    other._rootNode = nullptr;
+    other._chatLogic = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 

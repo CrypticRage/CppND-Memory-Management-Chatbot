@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 class GraphNode; // forward declaration
 
@@ -19,7 +20,7 @@ private:
     
 
 public:
-    // constructor / desctructor
+    // constructor / destructor
     GraphEdge(int id);
 
     // getter / setter
