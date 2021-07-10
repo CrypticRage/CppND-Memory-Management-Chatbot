@@ -17,7 +17,7 @@ void GraphNode::AddToken(std::string token)
 
 void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
 {
-    if (!edge) return;
+    if (edge == nullptr) return;
     _parentEdges.push_back(edge);
 }
 

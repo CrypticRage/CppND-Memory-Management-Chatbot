@@ -225,7 +225,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         // search for nodes which have no incoming edges
         if ((*it)->GetNumberOfParents() == 0)
         {
-
             if (rootNode == nullptr)
             {
                 rootNode = it->get(); // assign current node to root
@@ -238,7 +237,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     ChatBot chatBot("../images/chatbot.png");
-    // _chatBot = chatBot.get();
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     chatBot.SetChatLogicHandle(this);
@@ -263,7 +261,7 @@ void ChatLogic::SetChatbotHandle(ChatBot *chatbot)
 
 void ChatLogic::SendMessageToChatbot(std::string message)
 {
-    if (!_chatBot) return;
+    if (_chatBot == nullptr) return;
     _chatBot->ReceiveMessageFromUser(message);
 }
 
@@ -274,6 +272,6 @@ void ChatLogic::SendMessageToUser(std::string message)
 
 wxBitmap *ChatLogic::GetImageFromChatbot()
 {
-    if (!_chatBot) return nullptr;
+    if (_chatBot == nullptr) return nullptr;
     return _chatBot->GetImageHandle();
 }

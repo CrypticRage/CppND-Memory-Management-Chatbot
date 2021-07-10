@@ -48,7 +48,7 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot& other) {
     std::cout << "ChatBot Copy Constructor" << std::endl;
     // data handles (owned)
-    _image = new wxBitmap(*other._image); // avatar image
+    _image = other._image; // avatar image
 
     // data handles (not owned)
     _currentNode = other._currentNode;
@@ -62,7 +62,7 @@ ChatBot &ChatBot::operator=(const ChatBot &other) {
     if (this == &other) return *this;
 
     // data handles (owned)
-    _image = new wxBitmap(*other._image); // avatar image
+    _image = other._image; // avatar image
 
     // data handles (not owned)
     _currentNode = other._currentNode;
@@ -78,13 +78,14 @@ ChatBot::ChatBot(ChatBot &&other) {
     // data handles (owned)
     _image = other._image; // avatar image
 
-    other._image = nullptr;
-
     // data handles (not owned)
     _currentNode = other._currentNode;
     _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
 
+    _chatLogic->SetChatbotHandle(this);
+
+    other._image = NULL;
     other._currentNode = nullptr;
     other._rootNode = nullptr;
     other._chatLogic = nullptr;
@@ -96,15 +97,17 @@ ChatBot &ChatBot::operator=(ChatBot &&other) {
     if (this == &other) return *this;
 
     // data handles (owned)
+    if (_image != NULL) delete _image;
     _image = other._image; // avatar image
-
-    other._image = nullptr;
 
     // data handles (not owned)
     _currentNode = other._currentNode;
     _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
 
+    _chatLogic->SetChatbotHandle(this);
+
+    other._image = NULL;
     other._currentNode = nullptr;
     other._rootNode = nullptr;
     other._chatLogic = nullptr;
