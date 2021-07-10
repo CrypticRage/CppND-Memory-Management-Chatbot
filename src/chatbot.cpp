@@ -48,7 +48,7 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot& other) {
     std::cout << "ChatBot Copy Constructor" << std::endl;
     // data handles (owned)
-    _image = other._image; // avatar image
+    _image = new wxBitmap(*other._image); // avatar image
 
     // data handles (not owned)
     _currentNode = other._currentNode;
@@ -62,7 +62,7 @@ ChatBot &ChatBot::operator=(const ChatBot &other) {
     if (this == &other) return *this;
 
     // data handles (owned)
-    _image = other._image; // avatar image
+    _image = new wxBitmap(*other._image); // avatar image
 
     // data handles (not owned)
     _currentNode = other._currentNode;
